@@ -1,0 +1,28 @@
+{
+  "name": "warzone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rbxtsc",
+    "watch": "rbxtsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arcanoecole-It1/WarZone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/arcanoecole-It1/WarZone/issues"
+  },
+  "homepage": "https://github.com/arcanoecole-It1/WarZone#readme",
+  "devDependencies": {
+    "@rbxts/compiler-types": "^3.0.0-types.0",
+    "@rbxts/types": "^1.0.917",
+    "roblox-ts": "^3.0.0",
+    "typescript": "^6.0.3"
+  }
+}
