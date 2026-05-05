@@ -1,0 +1,568 @@
+{
+  "info": {
+    "name": "WarZone API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Collection Postman pour tester toutes les routes de l'API WarZone."
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "access_token",
+      "value": ""
+    },
+    {
+      "key": "refresh_token",
+      "value": ""
+    },
+    {
+      "key": "player_id",
+      "value": ""
+    },
+    {
+      "key": "match_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth/Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"password\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/auth/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "const jsonData = pm.response.json();",
+              "pm.test('Response has access_token and refresh_token', function () {",
+              "    pm.expect(jsonData).to.have.property('access_token');",
+              "    pm.expect(jsonData).to.have.property('refresh_token');",
+              "});",
+              "pm.collectionVariables.set('access_token', jsonData.access_token);",
+              "pm.collectionVariables.set('refresh_token', jsonData.refresh_token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth/Refresh token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"refresh_token\": \"{{refresh_token}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/auth/refresh",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "auth",
+            "refresh"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "const jsonData = pm.response.json();",
+              "pm.test('Response has new tokens', function () {",
+              "    pm.expect(jsonData).to.have.property('access_token');",
+              "    pm.expect(jsonData).to.have.property('refresh_token');",
+              "});",
+              "pm.collectionVariables.set('access_token', jsonData.access_token);",
+              "pm.collectionVariables.set('refresh_token', jsonData.refresh_token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Players/Create player",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"roblox_id\": \"12345\",\n  \"username\": \"playerTest\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/players/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "players",
+            ""
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201 or 200', function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              "const jsonData = pm.response.json();",
+              "pm.test('Response contains player id and win_rate', function () {",
+              "    pm.expect(jsonData).to.have.property('id');",
+              "    pm.expect(jsonData).to.have.property('win_rate');",
+              "});",
+              "pm.collectionVariables.set('player_id', jsonData.id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Players/Get player",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/players/{{player_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "players",
+            "{{player_id}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "const jsonData = pm.response.json();",
+              "pm.test('Response returns same player_id', function () {",
+              "    pm.expect(jsonData.id).to.eql(pm.collectionVariables.get('player_id'));",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Matches/Open match",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"map_name\": \"Dustbite\",\n  \"started_at\": \"2026-05-05T12:00:00Z\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/matches/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "matches",
+            ""
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "const jsonData = pm.response.json();",
+              "pm.test('Response contains match id', function () {",
+              "    pm.expect(jsonData).to.have.property('id');",
+              "    pm.expect(jsonData.status).to.eql('ongoing');",
+              "});",
+              "pm.collectionVariables.set('match_id', jsonData.id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Matches/Close match",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"winner_team\": \"A\",\n  \"ended_at\": \"2026-05-05T12:10:00Z\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/matches/{{match_id}}/close",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "matches",
+            "{{match_id}}",
+            "close"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "const jsonData = pm.response.json();",
+              "pm.test('Match is finished', function () {",
+              "    pm.expect(jsonData.status).to.eql('finished');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Matches/Get match",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/matches/{{match_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "matches",
+            "{{match_id}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Kills/Create kill",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"killer_id\": \"{{player_id}}\",\n  \"victim_id\": \"{{player_id}}\",\n  \"party_id\": \"{{match_id}}\",\n  \"weapon\": \"Rifle\",\n  \"timestamp\": \"2026-05-05T12:05:00Z\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/kills/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "kills",
+            ""
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "const jsonData = pm.response.json();",
+              "pm.test('Response contains kill id', function () {",
+              "    pm.expect(jsonData).to.have.property('id');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stats/Get player stats",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/stats/{{player_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "stats",
+            "{{player_id}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "const jsonData = pm.response.json();",
+              "pm.test('Stats response has total_kills', function () {",
+              "    pm.expect(jsonData).to.have.property('total_kills');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stats/Get player grade",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/stats/{{player_id}}/grade",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "stats",
+            "{{player_id}}",
+            "grade"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Leaderboard/Get top players",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/leaderboard?limit=10&sort_by=win_rate",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "leaderboard"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "10"
+            },
+            {
+              "key": "sort_by",
+              "value": "win_rate"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "const jsonData = pm.response.json();",
+              "pm.test('Leaderboard is an array', function () {",
+              "    pm.expect(jsonData).to.be.an('array');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analytics/Overview",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/analytics/overview",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "analytics",
+            "overview"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analytics/Kills by weapon",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/analytics/kills-by-weapon",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "analytics",
+            "kills-by-weapon"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analytics/Matches per day",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/analytics/matches-per-day",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "analytics",
+            "matches-per-day"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

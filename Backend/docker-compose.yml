@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    container_name: warzone-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: warzone
+    ports:
+      - "5432:5432"
+    volumes:
+      - warzone_data:/var/lib/postgresql/data
+ 
+volumes:
+  warzone_data:

@@ -1,328 +1,289 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
-  <root>
-    <mxCell id="0" />
-    <mxCell id="1" parent="0" />
-
-    <mxCell id="ns_roblox" value="CoucheRoblox" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;" vertex="1" parent="1">
-      <mxGeometry x="20" y="20" width="900" height="700" as="geometry" />
-    </mxCell>
-
-    <mxCell id="Player" value="Player" style="swimlane;startSize=30;fillColor=#EEEDFE;strokeColor=#534AB7;fontStyle=1;" vertex="1" parent="ns_roblox">
-      <mxGeometry x="30" y="50" width="200" height="220" as="geometry" />
-    </mxCell>
-    <mxCell id="Player_attrs" value="+ robloxId: string&#xa;+ username: string&#xa;+ team: Team&#xa;+ health: number&#xa;+ isAlive: boolean" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="Player">
-      <mxGeometry x="0" y="30" width="200" height="90" as="geometry" />
-    </mxCell>
-    <mxCell id="Player_sep" value="" style="line;strokeColor=#534AB7;" vertex="1" parent="Player">
-      <mxGeometry x="0" y="120" width="200" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="Player_methods" value="+ spawn(): void&#xa;+ die(): void&#xa;+ sendStatsToAPI(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="Player">
-      <mxGeometry x="0" y="130" width="200" height="70" as="geometry" />
-    </mxCell>
-
-    <mxCell id="Team" value="Team" style="swimlane;startSize=30;fillColor=#EEEDFE;strokeColor=#534AB7;fontStyle=1;" vertex="1" parent="ns_roblox">
-      <mxGeometry x="270" y="50" width="200" height="190" as="geometry" />
-    </mxCell>
-    <mxCell id="Team_attrs" value="+ name: string&#xa;+ color: TeamColor&#xa;+ score: number&#xa;+ players: Player[]" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="Team">
-      <mxGeometry x="0" y="30" width="200" height="80" as="geometry" />
-    </mxCell>
-    <mxCell id="Team_sep" value="" style="line;strokeColor=#534AB7;" vertex="1" parent="Team">
-      <mxGeometry x="0" y="110" width="200" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="Team_methods" value="+ addPlayer(p: Player): void&#xa;+ incrementScore(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="Team">
-      <mxGeometry x="0" y="120" width="200" height="50" as="geometry" />
-    </mxCell>
-
-    <mxCell id="Weapon" value="Weapon" style="swimlane;startSize=30;fillColor=#EEEDFE;strokeColor=#534AB7;fontStyle=1;" vertex="1" parent="ns_roblox">
-      <mxGeometry x="510" y="50" width="200" height="190" as="geometry" />
-    </mxCell>
-    <mxCell id="Weapon_attrs" value="+ name: string&#xa;+ type: WeaponType&#xa;+ damage: number" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="Weapon">
-      <mxGeometry x="0" y="30" width="200" height="70" as="geometry" />
-    </mxCell>
-    <mxCell id="Weapon_sep" value="" style="line;strokeColor=#534AB7;" vertex="1" parent="Weapon">
-      <mxGeometry x="0" y="100" width="200" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="Weapon_methods" value="+ equip(player: Player): void&#xa;+ attack(target: Player): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="Weapon">
-      <mxGeometry x="0" y="110" width="200" height="60" as="geometry" />
-    </mxCell>
-
-    <mxCell id="GameRound" value="GameRound" style="swimlane;startSize=30;fillColor=#EEEDFE;strokeColor=#534AB7;fontStyle=1;" vertex="1" parent="ns_roblox">
-      <mxGeometry x="30" y="320" width="230" height="300" as="geometry" />
-    </mxCell>
-    <mxCell id="GameRound_attrs" value="+ partyId: string&#xa;+ duration: number&#xa;+ timer: number&#xa;+ status: RoundStatus&#xa;+ redTeam: Team&#xa;+ blueTeam: Team" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="GameRound">
-      <mxGeometry x="0" y="30" width="230" height="120" as="geometry" />
-    </mxCell>
-    <mxCell id="GameRound_sep" value="" style="line;strokeColor=#534AB7;" vertex="1" parent="GameRound">
-      <mxGeometry x="0" y="150" width="230" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="GameRound_methods" value="+ start(): void&#xa;+ end(): void&#xa;+ onKill(killer: Player, victim: Player): void&#xa;+ syncWithAPI(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="GameRound">
-      <mxGeometry x="0" y="160" width="230" height="90" as="geometry" />
-    </mxCell>
-
-    <mxCell id="ns_api" value="CoucheBackendAPI" style="swimlane;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=14;" vertex="1" parent="1">
-      <mxGeometry x="960" y="20" width="1100" height="840" as="geometry" />
-    </mxCell>
-
-    <mxCell id="UserEntity" value="UserEntity" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" vertex="1" parent="ns_api">
-      <mxGeometry x="30" y="50" width="220" height="220" as="geometry" />
-    </mxCell>
-    <mxCell id="UserEntity_attrs" value="+ id: UUID&#xa;+ robloxId: string&#xa;+ username: string&#xa;+ createdAt: datetime" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="UserEntity">
-      <mxGeometry x="0" y="30" width="220" height="80" as="geometry" />
-    </mxCell>
-    <mxCell id="UserEntity_sep" value="" style="line;strokeColor=#1D9E75;" vertex="1" parent="UserEntity">
-      <mxGeometry x="0" y="110" width="220" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="UserEntity_methods" value="+ register(): UserEntity&#xa;+ findById(id: UUID): UserEntity&#xa;+ update(): UserEntity" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="UserEntity">
-      <mxGeometry x="0" y="120" width="220" height="70" as="geometry" />
-    </mxCell>
-
-    <mxCell id="MatchEntity" value="MatchEntity" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" vertex="1" parent="ns_api">
-      <mxGeometry x="290" y="50" width="230" height="230" as="geometry" />
-    </mxCell>
-    <mxCell id="MatchEntity_attrs" value="+ id: UUID&#xa;+ startedAt: datetime&#xa;+ endedAt: datetime&#xa;+ winnerTeam: string&#xa;+ mapName: string&#xa;+ status: MatchStatus" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="MatchEntity">
-      <mxGeometry x="0" y="30" width="230" height="120" as="geometry" />
-    </mxCell>
-    <mxCell id="MatchEntity_sep" value="" style="line;strokeColor=#1D9E75;" vertex="1" parent="MatchEntity">
-      <mxGeometry x="0" y="150" width="230" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="MatchEntity_methods" value="+ create(): MatchEntity&#xa;+ close(winner: string): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="MatchEntity">
-      <mxGeometry x="0" y="160" width="230" height="50" as="geometry" />
-    </mxCell>
-
-    <mxCell id="KillEntity" value="KillEntity" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" vertex="1" parent="ns_api">
-      <mxGeometry x="560" y="50" width="220" height="230" as="geometry" />
-    </mxCell>
-    <mxCell id="KillEntity_attrs" value="+ id: UUID&#xa;+ killerId: UUID&#xa;+ victimId: UUID&#xa;+ partyId: UUID&#xa;+ weapon: string&#xa;+ timestamp: datetime" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="KillEntity">
-      <mxGeometry x="0" y="30" width="220" height="120" as="geometry" />
-    </mxCell>
-    <mxCell id="KillEntity_sep" value="" style="line;strokeColor=#1D9E75;" vertex="1" parent="KillEntity">
-      <mxGeometry x="0" y="150" width="220" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="KillEntity_methods" value="+ record(): KillEntity" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="KillEntity">
-      <mxGeometry x="0" y="160" width="220" height="40" as="geometry" />
-    </mxCell>
-
-    <mxCell id="PlayerStats" value="PlayerStats" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" vertex="1" parent="ns_api">
-      <mxGeometry x="30" y="330" width="220" height="210" as="geometry" />
-    </mxCell>
-    <mxCell id="PlayerStats_attrs" value="+ id: UUID&#xa;+ playerId: UUID&#xa;+ totalKills: number&#xa;+ totalDeaths: number&#xa;+ kdRatio: number&#xa;+ winRate: number" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="PlayerStats">
-      <mxGeometry x="0" y="30" width="220" height="120" as="geometry" />
-    </mxCell>
-    <mxCell id="PlayerStats_sep" value="" style="line;strokeColor=#1D9E75;" vertex="1" parent="PlayerStats">
-      <mxGeometry x="0" y="150" width="220" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="PlayerStats_methods" value="+ recalculate(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="PlayerStats">
-      <mxGeometry x="0" y="160" width="220" height="30" as="geometry" />
-    </mxCell>
-
-    <mxCell id="GradeEntity" value="GradeEntity" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" vertex="1" parent="ns_api">
-      <mxGeometry x="290" y="330" width="230" height="210" as="geometry" />
-    </mxCell>
-    <mxCell id="GradeEntity_attrs" value="+ id: UUID&#xa;+ playerId: UUID&#xa;+ label: string&#xa;+ level: number&#xa;+ updatedAt: datetime" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="GradeEntity">
-      <mxGeometry x="0" y="30" width="230" height="100" as="geometry" />
-    </mxCell>
-    <mxCell id="GradeEntity_sep" value="" style="line;strokeColor=#1D9E75;" vertex="1" parent="GradeEntity">
-      <mxGeometry x="0" y="130" width="230" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="GradeEntity_methods" value="+ computeFromKills(kills: number): GradeEntity" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="GradeEntity">
-      <mxGeometry x="0" y="140" width="230" height="40" as="geometry" />
-    </mxCell>
-
-    <mxCell id="AdminEntity" value="AdminEntity" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" vertex="1" parent="ns_api">
-      <mxGeometry x="560" y="330" width="220" height="190" as="geometry" />
-    </mxCell>
-    <mxCell id="AdminEntity_attrs" value="+ id: UUID&#xa;+ username: string&#xa;+ passwordHash: string" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="AdminEntity">
-      <mxGeometry x="0" y="30" width="220" height="70" as="geometry" />
-    </mxCell>
-    <mxCell id="AdminEntity_sep" value="" style="line;strokeColor=#1D9E75;" vertex="1" parent="AdminEntity">
-      <mxGeometry x="0" y="100" width="220" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="AdminEntity_methods" value="+ login(pwd: string): TokenPair&#xa;+ logout(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="AdminEntity">
-      <mxGeometry x="0" y="110" width="220" height="50" as="geometry" />
-    </mxCell>
-
-    <mxCell id="RefreshTokenEntity" value="RefreshTokenEntity" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" vertex="1" parent="ns_api">
-      <mxGeometry x="820" y="330" width="230" height="230" as="geometry" />
-    </mxCell>
-    <mxCell id="RefreshTokenEntity_attrs" value="+ id: UUID&#xa;+ adminId: UUID&#xa;+ tokenHash: string&#xa;+ expiresAt: datetime&#xa;+ revoked: boolean" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="RefreshTokenEntity">
-      <mxGeometry x="0" y="30" width="230" height="100" as="geometry" />
-    </mxCell>
-    <mxCell id="RefreshTokenEntity_sep" value="" style="line;strokeColor=#1D9E75;" vertex="1" parent="RefreshTokenEntity">
-      <mxGeometry x="0" y="130" width="230" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="RefreshTokenEntity_methods" value="+ revoke(): void&#xa;+ isValid(): boolean" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="RefreshTokenEntity">
-      <mxGeometry x="0" y="140" width="230" height="50" as="geometry" />
-    </mxCell>
-
-    <mxCell id="LeaderboardService" value="LeaderboardService" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" vertex="1" parent="ns_api">
-      <mxGeometry x="30" y="600" width="230" height="120" as="geometry" />
-    </mxCell>
-    <mxCell id="LeaderboardService_sep" value="" style="line;strokeColor=#1D9E75;" vertex="1" parent="LeaderboardService">
-      <mxGeometry x="0" y="30" width="230" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="LeaderboardService_methods" value="+ getTop(limit: number): PlayerStats[]&#xa;+ sortBy(field: string): PlayerStats[]" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="LeaderboardService">
-      <mxGeometry x="0" y="40" width="230" height="60" as="geometry" />
-    </mxCell>
-
-    <mxCell id="AnalyticsService" value="AnalyticsService" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" vertex="1" parent="ns_api">
-      <mxGeometry x="300" y="600" width="240" height="130" as="geometry" />
-    </mxCell>
-    <mxCell id="AnalyticsService_sep" value="" style="line;strokeColor=#1D9E75;" vertex="1" parent="AnalyticsService">
-      <mxGeometry x="0" y="30" width="240" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="AnalyticsService_methods" value="+ getOverview(): OverviewDTO&#xa;+ getKillsByWeapon(): dict&#xa;+ getPartiesPerDay(): list" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="AnalyticsService">
-      <mxGeometry x="0" y="40" width="240" height="70" as="geometry" />
-    </mxCell>
-
-    <mxCell id="ns_dashboard" value="CoucheDashboard" style="swimlane;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=14;" vertex="1" parent="1">
-      <mxGeometry x="20" y="760" width="900" height="600" as="geometry" />
-    </mxCell>
-
-    <mxCell id="AuthStore" value="AuthStore" style="swimlane;startSize=30;fillColor=#E6F1FB;strokeColor=#185FA5;fontStyle=1;" vertex="1" parent="ns_dashboard">
-      <mxGeometry x="30" y="50" width="220" height="210" as="geometry" />
-    </mxCell>
-    <mxCell id="AuthStore_attrs" value="+ accessToken: string&#xa;+ refreshToken: string&#xa;+ isAuthenticated: boolean" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="AuthStore">
-      <mxGeometry x="0" y="30" width="220" height="70" as="geometry" />
-    </mxCell>
-    <mxCell id="AuthStore_sep" value="" style="line;strokeColor=#185FA5;" vertex="1" parent="AuthStore">
-      <mxGeometry x="0" y="100" width="220" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="AuthStore_methods" value="+ login(user: string, pwd: string): void&#xa;+ logout(): void&#xa;+ refreshAccessToken(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="AuthStore">
-      <mxGeometry x="0" y="110" width="220" height="70" as="geometry" />
-    </mxCell>
-
-    <mxCell id="LeaderboardComponent" value="LeaderboardComponent" style="swimlane;startSize=30;fillColor=#E6F1FB;strokeColor=#185FA5;fontStyle=1;" vertex="1" parent="ns_dashboard">
-      <mxGeometry x="290" y="50" width="230" height="180" as="geometry" />
-    </mxCell>
-    <mxCell id="LeaderboardComponent_attrs" value="+ players: PlayerStats[]&#xa;+ sortField: string" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="LeaderboardComponent">
-      <mxGeometry x="0" y="30" width="230" height="60" as="geometry" />
-    </mxCell>
-    <mxCell id="LeaderboardComponent_sep" value="" style="line;strokeColor=#185FA5;" vertex="1" parent="LeaderboardComponent">
-      <mxGeometry x="0" y="90" width="230" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="LeaderboardComponent_methods" value="+ loadLeaderboard(): void&#xa;+ sortBy(field: string): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="LeaderboardComponent">
-      <mxGeometry x="0" y="100" width="230" height="60" as="geometry" />
-    </mxCell>
-
-    <mxCell id="AnalyticsDashboard" value="AnalyticsDashboard" style="swimlane;startSize=30;fillColor=#E6F1FB;strokeColor=#185FA5;fontStyle=1;" vertex="1" parent="ns_dashboard">
-      <mxGeometry x="560" y="50" width="230" height="180" as="geometry" />
-    </mxCell>
-    <mxCell id="AnalyticsDashboard_attrs" value="+ overview: OverviewDTO&#xa;+ charts: ChartData[]" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="AnalyticsDashboard">
-      <mxGeometry x="0" y="30" width="230" height="60" as="geometry" />
-    </mxCell>
-    <mxCell id="AnalyticsDashboard_sep" value="" style="line;strokeColor=#185FA5;" vertex="1" parent="AnalyticsDashboard">
-      <mxGeometry x="0" y="90" width="230" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="AnalyticsDashboard_methods" value="+ loadOverview(): void&#xa;+ loadCharts(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="AnalyticsDashboard">
-      <mxGeometry x="0" y="100" width="230" height="60" as="geometry" />
-    </mxCell>
-
-    <mxCell id="PlayerDetailPage" value="PlayerDetailPage" style="swimlane;startSize=30;fillColor=#E6F1FB;strokeColor=#185FA5;fontStyle=1;" vertex="1" parent="ns_dashboard">
-      <mxGeometry x="30" y="310" width="230" height="190" as="geometry" />
-    </mxCell>
-    <mxCell id="PlayerDetailPage_attrs" value="+ player: UserEntity&#xa;+ stats: PlayerStats&#xa;+ grade: GradeEntity" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="PlayerDetailPage">
-      <mxGeometry x="0" y="30" width="230" height="70" as="geometry" />
-    </mxCell>
-    <mxCell id="PlayerDetailPage_sep" value="" style="line;strokeColor=#185FA5;" vertex="1" parent="PlayerDetailPage">
-      <mxGeometry x="0" y="100" width="230" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="PlayerDetailPage_methods" value="+ loadPlayer(id: string): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="PlayerDetailPage">
-      <mxGeometry x="0" y="110" width="230" height="40" as="geometry" />
-    </mxCell>
-
-    <mxCell id="ApiService" value="ApiService" style="swimlane;startSize=30;fillColor=#E6F1FB;strokeColor=#185FA5;fontStyle=1;" vertex="1" parent="ns_dashboard">
-      <mxGeometry x="310" y="310" width="230" height="210" as="geometry" />
-    </mxCell>
-    <mxCell id="ApiService_attrs" value="+ baseURL: string" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="ApiService">
-      <mxGeometry x="0" y="30" width="230" height="40" as="geometry" />
-    </mxCell>
-    <mxCell id="ApiService_sep" value="" style="line;strokeColor=#185FA5;" vertex="1" parent="ApiService">
-      <mxGeometry x="0" y="70" width="230" height="10" as="geometry" />
-    </mxCell>
-    <mxCell id="ApiService_methods" value="+ get(path: string): Promise&#xa;+ post(path: string, body: any): Promise&#xa;+ put(path: string, body: any): Promise&#xa;+ handleUnauthorized(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" vertex="1" parent="ApiService">
-      <mxGeometry x="0" y="80" width="230" height="100" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel1" value="1..2 compose" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;" edge="1" source="GameRound" target="Team" parent="ns_roblox">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel2" value="1..N contient" style="edgeStyle=orthogonalEdgeStyle;endArrow=diamond;endFill=1;" edge="1" source="Team" target="Player" parent="ns_roblox">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel3" value="1..2 equipe" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;" edge="1" source="Player" target="Weapon" parent="ns_roblox">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel4" value="gere" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="GameRound" target="Player" parent="ns_roblox">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel5" value="POST /players" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="GameRound" target="UserEntity" parent="1">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel6" value="POST /parties" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="GameRound" target="MatchEntity" parent="1">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel7" value="POST /kills" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="GameRound" target="KillEntity" parent="1">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel8" value="1..1 possede" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;" edge="1" source="UserEntity" target="PlayerStats" parent="ns_api">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel9" value="1..1 possede" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;" edge="1" source="UserEntity" target="GradeEntity" parent="ns_api">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel10" value="determine" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;" edge="1" source="PlayerStats" target="GradeEntity" parent="ns_api">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel11" value="1..N genere" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;" edge="1" source="AdminEntity" target="RefreshTokenEntity" parent="ns_api">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel12" value="lit" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="LeaderboardService" target="PlayerStats" parent="ns_api">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel13" value="agrege" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="AnalyticsService" target="MatchEntity" parent="ns_api">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel14" value="agrege" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="AnalyticsService" target="KillEntity" parent="ns_api">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel15" value="killer/victim" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="KillEntity" target="UserEntity" parent="ns_api">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel16" value="utilise" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="AuthStore" target="ApiService" parent="ns_dashboard">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel17" value="GET /leaderboard" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="LeaderboardComponent" target="ApiService" parent="ns_dashboard">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel18" value="GET /analytics" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="AnalyticsDashboard" target="ApiService" parent="ns_dashboard">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel19" value="GET /players" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="PlayerDetailPage" target="ApiService" parent="ns_dashboard">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-    <mxCell id="rel20" value="refresh si 401" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" source="ApiService" target="AuthStore" parent="ns_dashboard">
-      <mxGeometry relative="1" as="geometry" />
-    </mxCell>
-
-  </root>
-</mxGraphModel>
+<mxfile host="65bd71144e">
+    <diagram id="lpDfSyu7zm1udHEHFUuR" name="Page-1">
+        <mxGraphModel dx="666" dy="369" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="ns_roblox" value="CoucheRoblox" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="20" width="900" height="700" as="geometry"/>
+                </mxCell>
+                <mxCell id="Player" value="Player" style="swimlane;startSize=30;fillColor=#EEEDFE;strokeColor=#534AB7;fontStyle=1;" parent="ns_roblox" vertex="1">
+                    <mxGeometry x="30" y="50" width="200" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="Player_attrs" value="+ robloxId: string&#xa;+ username: string&#xa;+ team: Team&#xa;+ health: number&#xa;+ isAlive: boolean" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="Player" vertex="1">
+                    <mxGeometry y="30" width="200" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="Player_sep" value="" style="line;strokeColor=#534AB7;" parent="Player" vertex="1">
+                    <mxGeometry y="120" width="200" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="Player_methods" value="+ spawn(): void&#xa;+ die(): void&#xa;+ sendStatsToAPI(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="Player" vertex="1">
+                    <mxGeometry y="130" width="200" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="Team" value="Team" style="swimlane;startSize=30;fillColor=#EEEDFE;strokeColor=#534AB7;fontStyle=1;" parent="ns_roblox" vertex="1">
+                    <mxGeometry x="270" y="50" width="200" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="Team_attrs" value="+ name: string&#xa;+ color: TeamColor&#xa;+ score: number&#xa;+ players: Player[]" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="Team" vertex="1">
+                    <mxGeometry y="30" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Team_sep" value="" style="line;strokeColor=#534AB7;" parent="Team" vertex="1">
+                    <mxGeometry y="110" width="200" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="Team_methods" value="+ addPlayer(p: Player): void&#xa;+ incrementScore(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="Team" vertex="1">
+                    <mxGeometry y="120" width="200" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="Weapon" value="Weapon" style="swimlane;startSize=30;fillColor=#EEEDFE;strokeColor=#534AB7;fontStyle=1;" parent="ns_roblox" vertex="1">
+                    <mxGeometry x="510" y="50" width="200" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="Weapon_attrs" value="+ name: string&#xa;+ type: WeaponType&#xa;+ damage: number" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="Weapon" vertex="1">
+                    <mxGeometry y="30" width="200" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="Weapon_sep" value="" style="line;strokeColor=#534AB7;" parent="Weapon" vertex="1">
+                    <mxGeometry y="100" width="200" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="Weapon_methods" value="+ equip(player: Player): void&#xa;+ attack(target: Player): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="Weapon" vertex="1">
+                    <mxGeometry y="110" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="GameRound" value="GameRound" style="swimlane;startSize=30;fillColor=#EEEDFE;strokeColor=#534AB7;fontStyle=1;" parent="ns_roblox" vertex="1">
+                    <mxGeometry x="30" y="320" width="230" height="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="GameRound_attrs" value="+ partyId: string&#xa;+ duration: number&#xa;+ timer: number&#xa;+ status: RoundStatus&#xa;+ redTeam: Team&#xa;+ blueTeam: Team" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="GameRound" vertex="1">
+                    <mxGeometry y="30" width="230" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="GameRound_sep" value="" style="line;strokeColor=#534AB7;" parent="GameRound" vertex="1">
+                    <mxGeometry y="150" width="230" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="GameRound_methods" value="+ start(): void&#xa;+ end(): void&#xa;+ onKill(killer: Player, victim: Player): void&#xa;+ syncWithAPI(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="GameRound" vertex="1">
+                    <mxGeometry y="160" width="230" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel1" value="1..2 compose" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;" parent="ns_roblox" source="GameRound" target="Team" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel2" value="1..N contient" style="edgeStyle=orthogonalEdgeStyle;endArrow=diamond;endFill=1;" parent="ns_roblox" source="Team" target="Player" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel3" value="1..2 equipe" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;" parent="ns_roblox" source="Player" target="Weapon" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel4" value="gere" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="ns_roblox" source="GameRound" target="Player" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ns_api" value="CoucheBackendAPI" style="swimlane;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=14;" parent="1" vertex="1">
+                    <mxGeometry x="960" y="20" width="1100" height="840" as="geometry"/>
+                </mxCell>
+                <mxCell id="UserEntity" value="UserEntity" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" parent="ns_api" vertex="1">
+                    <mxGeometry x="30" y="50" width="220" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="UserEntity_attrs" value="+ id: UUID&#xa;+ robloxId: string&#xa;+ username: string&#xa;+ createdAt: datetime" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="UserEntity" vertex="1">
+                    <mxGeometry y="30" width="220" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="UserEntity_sep" value="" style="line;strokeColor=#1D9E75;" parent="UserEntity" vertex="1">
+                    <mxGeometry y="110" width="220" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="UserEntity_methods" value="+ register(): UserEntity&#xa;+ findById(id: UUID): UserEntity&#xa;+ update(): UserEntity" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="UserEntity" vertex="1">
+                    <mxGeometry y="120" width="220" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="MatchEntity" value="MatchEntity" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" parent="ns_api" vertex="1">
+                    <mxGeometry x="290" y="50" width="230" height="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="MatchEntity_attrs" value="+ id: UUID&#xa;+ startedAt: datetime&#xa;+ endedAt: datetime&#xa;+ winnerTeam: string&#xa;+ mapName: string&#xa;+ status: MatchStatus" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="MatchEntity" vertex="1">
+                    <mxGeometry y="30" width="230" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="MatchEntity_sep" value="" style="line;strokeColor=#1D9E75;" parent="MatchEntity" vertex="1">
+                    <mxGeometry y="150" width="230" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="MatchEntity_methods" value="+ create(): MatchEntity&#xa;+ close(winner: string): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="MatchEntity" vertex="1">
+                    <mxGeometry y="160" width="230" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="KillEntity" value="KillEntity" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" parent="ns_api" vertex="1">
+                    <mxGeometry x="560" y="50" width="220" height="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="KillEntity_attrs" value="+ id: UUID&#xa;+ killerId: UUID&#xa;+ victimId: UUID&#xa;+ partyId: UUID&#xa;+ weapon: string&#xa;+ timestamp: datetime" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="KillEntity" vertex="1">
+                    <mxGeometry y="30" width="220" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="KillEntity_sep" value="" style="line;strokeColor=#1D9E75;" parent="KillEntity" vertex="1">
+                    <mxGeometry y="150" width="220" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="KillEntity_methods" value="+ record(): KillEntity" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="KillEntity" vertex="1">
+                    <mxGeometry y="160" width="220" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="PlayerStats" value="PlayerStats" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" parent="ns_api" vertex="1">
+                    <mxGeometry x="30" y="330" width="220" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="PlayerStats_attrs" value="+ id: UUID&#xa;+ playerId: UUID&#xa;+ totalKills: number&#xa;+ totalDeaths: number&#xa;+ kdRatio: number&#xa;+ winRate: number" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="PlayerStats" vertex="1">
+                    <mxGeometry y="30" width="220" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="PlayerStats_sep" value="" style="line;strokeColor=#1D9E75;" parent="PlayerStats" vertex="1">
+                    <mxGeometry y="150" width="220" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="PlayerStats_methods" value="+ recalculate(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="PlayerStats" vertex="1">
+                    <mxGeometry y="160" width="220" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="GradeEntity" value="GradeEntity" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" parent="ns_api" vertex="1">
+                    <mxGeometry x="290" y="330" width="230" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="GradeEntity_attrs" value="+ id: UUID&#xa;+ playerId: UUID&#xa;+ label: string&#xa;+ level: number&#xa;+ updatedAt: datetime" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="GradeEntity" vertex="1">
+                    <mxGeometry y="30" width="230" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="GradeEntity_sep" value="" style="line;strokeColor=#1D9E75;" parent="GradeEntity" vertex="1">
+                    <mxGeometry y="130" width="230" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="GradeEntity_methods" value="+ computeFromKills(kills: number): GradeEntity" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="GradeEntity" vertex="1">
+                    <mxGeometry y="140" width="230" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="AdminEntity" value="AdminEntity" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" parent="ns_api" vertex="1">
+                    <mxGeometry x="560" y="330" width="220" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="AdminEntity_attrs" value="+ id: UUID&#xa;+ username: string&#xa;+ passwordHash: string" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="AdminEntity" vertex="1">
+                    <mxGeometry y="30" width="220" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="AdminEntity_sep" value="" style="line;strokeColor=#1D9E75;" parent="AdminEntity" vertex="1">
+                    <mxGeometry y="100" width="220" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="AdminEntity_methods" value="+ login(pwd: string): TokenPair&#xa;+ logout(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="AdminEntity" vertex="1">
+                    <mxGeometry y="110" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="RefreshTokenEntity" value="RefreshTokenEntity" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" parent="ns_api" vertex="1">
+                    <mxGeometry x="820" y="330" width="230" height="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="RefreshTokenEntity_attrs" value="+ id: UUID&#xa;+ adminId: UUID&#xa;+ tokenHash: string&#xa;+ expiresAt: datetime&#xa;+ revoked: boolean" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="RefreshTokenEntity" vertex="1">
+                    <mxGeometry y="30" width="230" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="RefreshTokenEntity_sep" value="" style="line;strokeColor=#1D9E75;" parent="RefreshTokenEntity" vertex="1">
+                    <mxGeometry y="130" width="230" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="RefreshTokenEntity_methods" value="+ revoke(): void&#xa;+ isValid(): boolean" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="RefreshTokenEntity" vertex="1">
+                    <mxGeometry y="140" width="230" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="LeaderboardService" value="LeaderboardService" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" parent="ns_api" vertex="1">
+                    <mxGeometry x="30" y="600" width="230" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="LeaderboardService_sep" value="" style="line;strokeColor=#1D9E75;" parent="LeaderboardService" vertex="1">
+                    <mxGeometry y="30" width="230" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="LeaderboardService_methods" value="+ getTop(limit: number): PlayerStats[]&#xa;+ sortBy(field: string): PlayerStats[]" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="LeaderboardService" vertex="1">
+                    <mxGeometry y="40" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="AnalyticsService" value="AnalyticsService" style="swimlane;startSize=30;fillColor=#E1F5EE;strokeColor=#1D9E75;fontStyle=1;" parent="ns_api" vertex="1">
+                    <mxGeometry x="300" y="600" width="240" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="AnalyticsService_sep" value="" style="line;strokeColor=#1D9E75;" parent="AnalyticsService" vertex="1">
+                    <mxGeometry y="30" width="240" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="AnalyticsService_methods" value="+ getOverview(): OverviewDTO&#xa;+ getKillsByWeapon(): dict&#xa;+ getPartiesPerDay(): list" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="AnalyticsService" vertex="1">
+                    <mxGeometry y="40" width="240" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel8" value="1..1 possede" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;" parent="ns_api" source="UserEntity" target="PlayerStats" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel9" value="1..1 possede" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;" parent="ns_api" source="UserEntity" target="GradeEntity" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel10" value="determine" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;" parent="ns_api" source="PlayerStats" target="GradeEntity" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel11" value="1..N genere" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;" parent="ns_api" source="AdminEntity" target="RefreshTokenEntity" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel12" value="lit" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="ns_api" source="LeaderboardService" target="PlayerStats" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel13" value="agrege" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="ns_api" source="AnalyticsService" target="MatchEntity" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel14" value="agrege" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="ns_api" source="AnalyticsService" target="KillEntity" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel15" value="killer/victim" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="ns_api" source="KillEntity" target="UserEntity" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ns_dashboard" value="CoucheDashboard" style="swimlane;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=14;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="760" width="900" height="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="AuthStore" value="AuthStore" style="swimlane;startSize=30;fillColor=#E6F1FB;strokeColor=#185FA5;fontStyle=1;" parent="ns_dashboard" vertex="1">
+                    <mxGeometry x="30" y="50" width="220" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="AuthStore_attrs" value="+ accessToken: string&#xa;+ refreshToken: string&#xa;+ isAuthenticated: boolean" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="AuthStore" vertex="1">
+                    <mxGeometry y="30" width="220" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="AuthStore_sep" value="" style="line;strokeColor=#185FA5;" parent="AuthStore" vertex="1">
+                    <mxGeometry y="100" width="220" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="AuthStore_methods" value="+ login(user: string, pwd: string): void&#xa;+ logout(): void&#xa;+ refreshAccessToken(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="AuthStore" vertex="1">
+                    <mxGeometry y="110" width="220" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="LeaderboardComponent" value="LeaderboardComponent" style="swimlane;startSize=30;fillColor=#E6F1FB;strokeColor=#185FA5;fontStyle=1;" parent="ns_dashboard" vertex="1">
+                    <mxGeometry x="290" y="50" width="230" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="LeaderboardComponent_attrs" value="+ players: PlayerStats[]&#xa;+ sortField: string" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="LeaderboardComponent" vertex="1">
+                    <mxGeometry y="30" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="LeaderboardComponent_sep" value="" style="line;strokeColor=#185FA5;" parent="LeaderboardComponent" vertex="1">
+                    <mxGeometry y="90" width="230" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="LeaderboardComponent_methods" value="+ loadLeaderboard(): void&#xa;+ sortBy(field: string): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="LeaderboardComponent" vertex="1">
+                    <mxGeometry y="100" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="AnalyticsDashboard" value="AnalyticsDashboard" style="swimlane;startSize=30;fillColor=#E6F1FB;strokeColor=#185FA5;fontStyle=1;" parent="ns_dashboard" vertex="1">
+                    <mxGeometry x="560" y="50" width="230" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="AnalyticsDashboard_attrs" value="+ overview: OverviewDTO&#xa;+ charts: ChartData[]" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="AnalyticsDashboard" vertex="1">
+                    <mxGeometry y="30" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="AnalyticsDashboard_sep" value="" style="line;strokeColor=#185FA5;" parent="AnalyticsDashboard" vertex="1">
+                    <mxGeometry y="90" width="230" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="AnalyticsDashboard_methods" value="+ loadOverview(): void&#xa;+ loadCharts(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="AnalyticsDashboard" vertex="1">
+                    <mxGeometry y="100" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="PlayerDetailPage" value="PlayerDetailPage" style="swimlane;startSize=30;fillColor=#E6F1FB;strokeColor=#185FA5;fontStyle=1;" parent="ns_dashboard" vertex="1">
+                    <mxGeometry x="30" y="310" width="230" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="PlayerDetailPage_attrs" value="+ player: UserEntity&#xa;+ stats: PlayerStats&#xa;+ grade: GradeEntity" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="PlayerDetailPage" vertex="1">
+                    <mxGeometry y="30" width="230" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="PlayerDetailPage_sep" value="" style="line;strokeColor=#185FA5;" parent="PlayerDetailPage" vertex="1">
+                    <mxGeometry y="100" width="230" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="PlayerDetailPage_methods" value="+ loadPlayer(id: string): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="PlayerDetailPage" vertex="1">
+                    <mxGeometry y="110" width="230" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApiService" value="ApiService" style="swimlane;startSize=30;fillColor=#E6F1FB;strokeColor=#185FA5;fontStyle=1;" parent="ns_dashboard" vertex="1">
+                    <mxGeometry x="310" y="310" width="230" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApiService_attrs" value="+ baseURL: string" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="ApiService" vertex="1">
+                    <mxGeometry y="30" width="230" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApiService_sep" value="" style="line;strokeColor=#185FA5;" parent="ApiService" vertex="1">
+                    <mxGeometry y="70" width="230" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApiService_methods" value="+ get(path: string): Promise&#xa;+ post(path: string, body: any): Promise&#xa;+ put(path: string, body: any): Promise&#xa;+ handleUnauthorized(): void" style="text;align=left;verticalAlign=top;spacingLeft=5;" parent="ApiService" vertex="1">
+                    <mxGeometry y="80" width="230" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel16" value="utilise" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="ns_dashboard" source="AuthStore" target="ApiService" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel17" value="GET /leaderboard" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="ns_dashboard" source="LeaderboardComponent" target="ApiService" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel18" value="GET /analytics" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="ns_dashboard" source="AnalyticsDashboard" target="ApiService" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel19" value="GET /players" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="ns_dashboard" source="PlayerDetailPage" target="ApiService" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel20" value="refresh si 401" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="ns_dashboard" source="ApiService" target="AuthStore" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel5" value="POST /players" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="1" source="GameRound" target="UserEntity" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel6" value="POST /parties" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="1" source="GameRound" target="MatchEntity" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel7" value="POST /kills" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" parent="1" source="GameRound" target="KillEntity" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
